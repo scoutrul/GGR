@@ -1,13 +1,15 @@
 import React from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HomePage from 'components/routes/home/HomePage';
+import AboutPage from 'components/routes/home/AboutPage';
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/about" component={AboutPage} />
       </Switch>
-    </HashRouter>
+    </BrowserRouter>
   );
 }

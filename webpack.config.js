@@ -6,6 +6,7 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 const SETTINGS = require('./settings');
+var stylus = require('stylus');
 
 const production = process.env.NODE_ENV === 'production';
 
@@ -37,6 +38,21 @@ const loaders = [
     loader: production
       ? ExtractTextPlugin.extract({ fallback: 'style-loader', use: stylesLoaders })
       : ['style-loader', ...stylesLoaders],
+  },
+
+  {
+    test: /\.styl$/,
+    use: [
+      'style-loader',
+      {
+        loader: 'css-loader',
+        options: {
+          modules: true,
+          localIdentName: '[name]__[local]___[hash:base64:5]'
+        }
+      },
+      'stylus-loader'
+    ],
   },
 
   {

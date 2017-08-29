@@ -6,39 +6,30 @@ const API_KEY = '2AF3DE22-A4C2-1CAA-FF44-0A4B1FD3FE00';
 Backendless.serverURL = 'https://api.backendless.com';
 Backendless.initApp(APP_ID, API_KEY);
 
-Backendless.UserService.login( 'test@test.tt', 'pass', true )
+Backendless.UserService.login( 'test@test.tt', 'password', true )
 	.then( function( loggedInUser ) {
-		// console.log(loggedInUser)
-		// console.log(userObjectId, userToken, userObject)
+		console.log(`hello User "${loggedInUser.name}"`)
 
-		// Backendless.Data.of( "test" ).save( {text:'savedObject'} )
-		//  .then( function( savedObject ) {
-		//   console.log(savedObject);
-		//   })
-		//  .catch( function( error ) {
-		//   });
-		// Backendless.Data.describe( 'language' )
-		//  .then( function( schemaProps ) {
-		//  	console.log(schemaProps);
-		//   })
-		//  .catch( function( error ) {
-		//   });
+		var locationStorage = Backendless.Data.of( "location" );
+		var whereClause = "name LIKE 'sp'";
+		var queryBuilder = Backendless.DataQueryBuilder.create()
+			.setRelated( ["location_to_language"] )
+			.setWhereClause( whereClause)
+			.setRelationsDepth( 2 )
+			.setProperties("id, name");
 
+		locationStorage.find( queryBuilder ).then( function( res ) {
+					console.log(res)
+			})
+			.catch(function(err){
+				console.log(err)
+			})
 	})
-	.catch( function( error ) {
-		console.log(error)
-	});
+	.catch(function(err){
+		console.log(err)
+	})
 
-	var queryBuilder = Backendless.DataQueryBuilder.create()
-		.setRelated( "language_parent")
-		.setWhereClause( "name = 'sp'" ); 
 
-	Backendless.Data.of( "location" ).find( queryBuilder )
-	 .then( function( res ) {
-	 	console.log(res)
-	  })
-	 .catch( function( error ) {
-	  });
 
 
 export default function HomePage() {
@@ -53,13 +44,8 @@ export default function HomePage() {
 				Backend + React
 			</h1>
 			<ul>
-				<li>connect to the DB as admin user</li>
-				<li>- ask for login and pass</li>
-				<li>- if this = admin do next </li>
-				<li>fetch all tables</li>
-				<li>- show tables with content and relations</li>
-				<li>map all entaries</li>
-				<li>change data field</li>
+				<li>fetch table data</li>
+				<li>edit by input, save</li>
 			</ul>
 		</div>
 	);

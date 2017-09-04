@@ -1,0 +1,55 @@
+.slide_up_text // animation for text appear
+	max-height 150px
+	li, div, span
+		overflow hidden
+		display block
+		transform: translate(0, 150%)
+		transition $slide_up_text
+		transition-delay: 0s;
+		line-height: 113%;
+		& header
+			opacity 0
+		
+	&.slide_up_text--active
+		max-height: initial;
+		*
+			display block
+			transition $slide_up_text
+			transform: translate(0, 0%)
+			opacity 1
+		> li, > div
+			&:nth-child(1)
+				span
+					transition-delay: 0s
+		> li, > div
+			&:nth-child(2)
+				span
+					transition-delay: 0.1s
+		> li, > div
+			&:nth-child(3)
+				span
+					transition-delay: 0.2s
+		> li, > div
+			&:nth-child(4)
+				span
+					transition-delay: 0.3s
+		> li, > div
+			&:nth-child(5)
+				span
+					transition-delay: 0.4s
+		> li, > div
+			&:nth-child(6)
+				span
+					transition-delay: 0.5s
+		> li, > div
+			&:nth-child(7)
+				span
+					transition-delay: 0.6s
+		> li, > div
+			&:nth-child(8)
+				span
+					transition-delay: 0.7s
+		> li, > div
+			&:nth-child(9)
+				span
+					transition-delay: 0.8s

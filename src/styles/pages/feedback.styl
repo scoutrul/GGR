@@ -1,0 +1,59 @@
+section.feedback
+	.container
+		align-items: center;
+		.title
+			font-size: 150%;
+			text-align: center;
+			padding: 1rem 0;
+		form
+			width 100%
+			max-width $contentThin
+			align-items: center
+			padding: 1.5rem 0;
+			.thin
+				display flex
+				.field
+					flex 1 1 33%
+					font-size: 70%;
+			.field
+				label
+					position absolute
+					top 0
+					left 0
+					width 100%
+					height 100%
+					font-size 42%
+					font-weight 400
+					color #bcbcbc
+					display: flex;
+					align-items: center;
+					justify-content center
+					transition $transition
+					border-bottom: 2px solid rgba(27, 27, 27, 0.15);	
+				input
+					width 60%
+					margin auto
+					text-align: center;
+					font-size 42%
+					font-weight 400
+					transition $transition
+					height: 1.5rem;
+					padding: 0.9rem 0;
+					caret-color: $specialRed
+					z-index 10
+					&:hover
+						cursor text
+					
+					&:focus ~ label
+						font-size 25%
+						justify-content left
+						color rgba(27, 27, 27, 1);
+						border-bottom: 2px solid rgba(27, 27, 27, 1);
+						
+		.feedback_send
+			.title
+				font-size 100%
+			.title2
+				font-size: 32%;
+				color: #DDD;
+				margin: 0.5rem 0;

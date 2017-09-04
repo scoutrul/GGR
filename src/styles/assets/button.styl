@@ -1,0 +1,148 @@
+$button_max = 4rem
+$button_inner = 3.7rem
+
+$button_ratio = $button_max - $button_inner
+$button_ratio_half = $button_ratio / 2
+
+$margin_to_right = 0 0 0 auto
+$margin_to_left = 0 auto 0 0
+$button_font_size = 27%
+
+
+button(button_color = transparent, button_position = center, text_color = $white)
+	.button_inner
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 10rem;
+		min-height: .9rem;
+		line-height: .9rem;
+		if button_position = !center
+			max-width: $button_max
+		else
+			max-width: $button_inner
+		width: 100%;
+		transition $transition
+		background-color button_color
+		&:hover
+			background-color $darkhover
+			max-width: $button_max
+			.arrows
+
+				if text_color is dark
+					&:after, &:before
+						filter: brightness(10)
+			.message
+				if text_color is dark
+					color: $white;
+		.message
+			position: absolute;
+			left:0
+			top 0
+			transition $transition
+			white-space: nowrap;
+			if text_color is dark
+				color: $darkgrey
+			else
+				color text_color
+			font-weight: 400;
+			font-size: $button_font_size
+			width: 100%;
+			height 100%
+			padding 0
+			text-align: center;
+			if text_color is white
+				color: $white;
+
+		.arrows
+			display: flex;
+			align-items: center;
+			width: 100%;
+			height 100%
+			transition $transition
+			position absolute
+			left 0
+			top 0
+			&:after, &:before
+				content ''
+				display block
+				width: 0.2rem;
+				height: 0.2rem;
+				margin auto
+				background-repeat: no-repeat;
+				transition $transition
+				opacity 0
+				position absolute
+				top calc('50% - 0.1rem')
+			&:before
+				left .4rem
+				background-position: 0%; 
+				margin $margin_to_left	
+				// background-image: url(../images/icon_arrow_white_left.svg); //TD ADD this icon
+				if text_color is dark
+					background-image: url(../images/icon_arrow_black_left.svg);
+			&:after	
+				right .4rem
+				background-position: 100%;
+				margin $margin_to_right
+				background-image: url(../images/icon_arrow_white_right.svg);
+				if text_color is dark
+					background-image: url(../images/icon_arrow_black_right.svg);
+					
+	if button_position is left
+		justify-content: flex-end;
+		.button_inner
+			.arrows
+				&:before
+					opacity 1
+				&:after
+					opacity 0
+			&:hover
+				.message
+					left: $button_ratio_half;
+						
+	if button_position is right
+		justify-content: flex-start;
+		.button_inner
+			.arrows
+				&:before
+					opacity 0
+				&:after
+					opacity 1
+			&:hover
+				.message
+					left: - $button_ratio_half
+					
+$align(value)
+	&.red
+		button($specialRed,value,)
+	&.blue
+		button(#0077cb,value,)
+	&.grey
+		button($lightgrey2,value, dark)
+	&.green
+		button(#00cba6,value,)
+		
+//body
+button
+	cursor pointer
+	width $button_max
+	@media screen and (max-width: $iphoneH)
+		font-size 100%
+	display flex
+	justify-content: center;
+	align-items center
+	.message
+		color $specialRed
+		font-size: $button_font_size
+	&.blank
+		.message
+			text-align center
+	&.left
+		$align(left)
+	&.right
+		$align(right)
+	&.center
+		$align(center)
+		margin auto
+		

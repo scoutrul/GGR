@@ -7,10 +7,9 @@ const middlewares = [
   thunkMiddleware,
 ];
 
-export default function configureStore(initialState) {
+export default function configureStore() {
   const store = createStore(
     rootReducer,
-    initialState,
     compose(applyMiddleware(...middlewares), getReduxDevTools())
   );
 

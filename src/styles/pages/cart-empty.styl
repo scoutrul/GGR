@@ -1,0 +1,58 @@
+section.in-cart
+	flex-flow: column wrap;
+	.container
+		align-items: center;
+		justify-content: center;
+		min-height: 520px;
+		flex-flow column nowrap
+		&.is-empty
+			text-align: center;
+			.title
+				title_light()
+				color $lightgrey2
+			.link_under
+				text_underscore($darkgrey2, $darkgrey2)
+
+		.product_count
+			color $lightgrey
+			font-size: 30%;
+			text-align center
+			font-weight: 400;
+			margin 1rem;
+		.accordion_items
+			accordion_items()
+			@media screen and (max-width: $desktop)
+				margin 2rem auto
+			.edit, .delete
+				position absolute
+				right 0
+				top .5rem
+				z-index 20
+				margin: 0 0 0 1rem;
+				width: 0.4rem;
+				height: 0.4rem;
+				cursor: pointer;
+				background-repeat: no-repeat;
+			.edit
+				right 1rem
+				background-image: url(../images/icon_edit.svg);
+			.delete
+				background-image: url(../images/icon_close.svg);
+			header
+			main
+				.description
+					margin -.5rem 0 .5rem 
+			ul.items
+				padding 0
+				li
+					display flex
+					.header
+						font-size: 70%;
+						margin-right: 1rem;
+		
+		button.blank
+			margin: 1rem 0 0;
+			font-size: 130%;
+		
+		.steps_buttons
+			steps_buttons()

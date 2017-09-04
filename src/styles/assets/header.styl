@@ -1,0 +1,109 @@
+section.header
+	position: absolute;
+	z-index: 10;
+	color $white
+	background-color: $headerBg
+	&.index_layer
+		background-color: transparent
+		
+	.container
+		display flex
+		justify-content space-between
+		flex-flow row nowrap
+		align-items center
+		justify-content center
+		padding: 75px 15px;
+		@media screen and (max-width: $desktop)
+			padding: 15px;
+		.column
+			display flex
+			flex: 1 0 auto;
+			align-self: center;
+			flex-flow row nowrap
+			font-size 31%
+			
+			&.serv
+				flex: 0 0 210px;
+				align-items center
+				justify-content: space-between;
+				margin-right: 1rem;
+				.logo
+					align-self: center;
+					img
+						width 67px
+						height 67px
+						@media screen and (max-width: $desktop)
+							width 50px
+							height 50px
+							
+					
+				.location
+					display: flex;
+					text-align: center;
+					align-items: center;
+					cursor pointer
+					img
+						margin: auto 10px;
+						width: .3rem;
+						height: .3rem;
+					span
+						font-size 65%
+						transition: $transition
+					&:hover
+						span
+							color $specialRed
+			&.feedback
+				justify-content: flex-end;
+				flex: 0 0 210px;
+				.feedback_container
+					text-align: center;
+					display: flex;
+					transition $transition
+					a.inner
+						display flex
+						align-items center
+						transition: $transition
+						span
+							letter-spacing: 0.05rem;
+							font-size: 80%;
+							text-transform: uppercase;
+							color: #adadad;
+							font-weight: 400;
+						img
+							width .3rem
+							height .3rem
+							margin: auto $overpadding;
+					&:hover
+						cursor pointer
+						a.inner span
+							color $specialRed			
+			&.menu
+				.top_menu
+					display flex 
+					padding 0
+					margin: auto;
+					width: 100%;
+					justify-content: center
+					li
+						margin: 0 0.2rem
+						min-width: 1.65rem;
+						text-align: center;
+						transition $transition
+						a
+							letter-spacing: 0.05rem;
+							font-size: 80%;
+							text-transform: uppercase;
+							color: #adadad;
+							font-weight: 400;
+							&:hover
+								color $white		
+			@media screen and (max-width: $desktop)
+				&.serv
+					flex 1
+					.location
+						display none
+				&.feedback
+					display none
+				&.menu
+					display none
+			

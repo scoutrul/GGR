@@ -1,0 +1,52 @@
+section.hero
+	background-color $darkbg
+	.container
+		flex-direction column
+		max-height: 1200px;
+		height 100%
+		@media screen and (min-height $desktop) and (min-width: $ipad)
+			max-height: $desktop;
+		@media screen and (max-width: $iphone6)
+			height auto
+			padding: 2rem 15px 1rem;
+		@media screen and (max-width: $iphoneH)
+			min-height: 480px;
+		
+		&:after
+			content: '';
+			position: absolute;
+			top: 0.5rem;
+			background: url($goal01) no-repeat;
+			background-size: contain;
+			background-position: 100% 50%;
+			height: 100%;
+			width: 100%;
+			z-index: 6;
+
+		.screener
+			z-index 10
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			flex: 1 0 auto;
+			justify-content: center;
+			margin auto
+			@media screen and (max-width: 620px)
+				max-width: 100%;
+				padding 0
+			@media screen and (max-width: $iphone)
+				max-height: 1200px;
+			.title
+				color $white
+				text-align: center;
+				font-weight: 300;
+				margin: auto 0 0;
+				line-height: 130%;
+				.takecontrol
+					color $specialRed
+					font-size 60%
+			@media screen and (max-width: $iphone)
+				font-size 90%
+				line-height 100%
+			button
+				margin 1rem auto auto

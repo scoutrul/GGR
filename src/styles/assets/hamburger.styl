@@ -1,0 +1,56 @@
+.hamburger 
+	cursor: pointer;
+	outline: 0 
+	z-index: 100;
+	position: fixed;
+	right: 30px;
+	top: 35px;
+	@media screen and (min-width: $desktop)
+		display none 
+
+	.hamburger-box 
+		width: 37px;
+		height: 24px;
+		display: inline-block;
+		position: relative; 
+		.hamburger-inner 
+			display: block;
+			top: 50%;
+			margin-top: -2px; 
+		.hamburger-inner, .hamburger-inner:before, .hamburger-inner:after 
+			width: 37px;
+			height: 3px;
+			position: absolute;
+			transition-property: transform;
+			transition-duration: 0.15s;
+			transition-timing-function: ease; 
+			
+		.hamburger-inner:before,.hamburger-inner:after 
+			content: "";
+			display: block; 
+		.hamburger-inner:before 
+			top: -9px; 
+		.hamburger-inner:after 
+			bottom: -9px; 
+		.hamburger-inner
+			transition $transition
+			background-color $specialRed
+			&:before,&:after
+				transition $transition
+				background-color $specialRed
+		&:hover
+			cursor pointer
+			.hamburger-inner,.hamburger-inner:before,.hamburger-inner:after
+				background-color $darkhover
+			
+	&.is-active
+		.hamburger-inner:before,.hamburger-inner:after 
+			opacity: 0;
+		.hamburger-inner 
+			transform: rotate(45deg);
+		.hamburger-inner:before 
+			top: 0; 
+			transform: rotate(90deg);
+			opacity: 1;
+		.hamburger-inner:after 
+			bottom: 0; 

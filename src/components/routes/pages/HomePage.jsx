@@ -1,24 +1,16 @@
-import React, { Component } from 'react';
-import Backendless from 'backendless';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-const APP_ID = '402AB182-EB78-44E3-FF2F-08B037392D00';
-const API_KEY = '2AF3DE22-A4C2-1CAA-FF44-0A4B1FD3FE00';
-Backendless.initApp(APP_ID, API_KEY);
+import { bdGetLocation } from 'modules/actions/changeLanguage'
 
+import { Items } from 'components/presentational/Items'
 
-const Language = ({language, onClick}) => (
-	<button onClick={() => onClick(language)}>{language}</button>
-)
-const Locations = ({setLocation, onClick}) => (
-	<button onClick={() => onClick(setLocation)}>{setLocation}</button>
-)
-const Pages = ({setPage, onClick}) => (
-	<button onClick={() => onClick(setPage)}>{setPage}</button>
-)
+import { DB } from 'api/index'
 
-
-export default class HomePage extends Component {
-	constructor(props) {super(props)}
+class HomePage extends Component {
+	constructor(props){
+	  super(props)
+	}
 	state = {
 			adminUser: null,
 			currentLanguage: "en",
@@ -26,8 +18,8 @@ export default class HomePage extends Component {
 			currentLocation: "Jamaica",
 			locations: [],
 			navigation: [],
-			currentPage: "home",
-		}
+			currentPage: "Home",
+		};
 
 	componentDidMount(){
 		this.backendlessGetLocations()
@@ -40,15 +32,15 @@ export default class HomePage extends Component {
 	}
 
 	backendlessNavigation(){
-		Backendless.Data.of("navigation").find()
+		DB.Data.of("navigation").find()
 			.then((res) => {
-				const navigation = res.map(({name}) => name)
+				const navigation = res.map(({name}) => name);
 				this.setState({navigation})
 			})
 	}
 
 	backendlessUserLogin(login = 'test@test.tt', password = 'password'){ // TD login form
-		Backendless.UserService.login(login, password, true)
+		DB.UserService.login(login, password, true)
 			.then((loggedInUser) => {
 				this.setState({adminUser: loggedInUser.name})
 			})
@@ -58,13 +50,13 @@ export default class HomePage extends Component {
 	}
 
 	backendlessGetLocations(language = this.state.currentLanguage){
-		Backendless.Data.of("language").find()
+		DB.Data.of("language").find()
 			.then((res) => {
-				const languages = res.map(({name}) => name)
+				const languages = res.map(({name}) => name);
 				this.setState({languages})
 			})
 			.then(() => { // get locations depends changeLanguage()
-				const locationStorage = Backendless.Data.of("location");
+				const locationStorage = DB.Data.of("location");
 				const whereClause = `location_to_language.name = '${language}'`;
 				const queryBuilder = Backendless.DataQueryBuilder.create()
 					.setRelated(["location_to_language"])
@@ -74,7 +66,7 @@ export default class HomePage extends Component {
 				return locationStorage.find(queryBuilder)
 			})
 			.then((res) => {
-				const locations = res.map(({name}) => name)
+				const locations = res.map(({name}) => name);
 				this.setState({locations})
 			}) 
 			.catch((err) => {
@@ -82,7 +74,7 @@ export default class HomePage extends Component {
 	}
 
 	changeLanguage(currentLanguage) {
-		this.setState({currentLanguage},this.backendlessGetLocations(currentLanguage))
+		this.setState({currentLanguage}, function(){this.backendlessGetLocations(currentLanguage)})
 	}
 
 	changeLocation(currentLocation) {
@@ -102,7 +94,7 @@ export default class HomePage extends Component {
 				<div>
 					<h1>Language is: {this.state.currentLanguage}</h1>
 					{this.state.languages.map(language => (
-						<Language key={ language } language={ language } onClick={::this.changeLanguage}/>
+						<Items key={ language } name={ language } onClick={::this.changeLanguage}/>
 					))}
 
 				</div>
@@ -110,14 +102,14 @@ export default class HomePage extends Component {
 				<div>
 					<h1>Location is: {this.state.currentLocation}</h1>
 					{this.state.locations.map(location => (
-						<Locations key={ location } setLocation={ location } onClick={::this.changeLocation}/>
+						<Items key={ location } name={ location } onClick={::this.changeLocation}/>
 					))}
 				</div>
 
 				<div>
 					<h1>Page is: {this.state.currentPage}</h1>
 					{this.state.navigation.map(navigation => (
-						<Pages key={ navigation } setPage={ navigation } onClick={::this.changePage}/>
+						<Items key={ navigation } name={ navigation } onClick={::this.changePage}/>
 					))}
 				</div>
 
@@ -125,3 +117,21 @@ export default class HomePage extends Component {
 		)
 	}
 }
+
+const mapStateToProps = state => {
+  return {
+    currentLanguage : state
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    changeLanguage : () => dispatch({
+      type : 'CHANGE_LANGUAGE'
+    })
+  }
+}
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomePage)

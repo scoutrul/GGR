@@ -1,0 +1,55 @@
+section.footer
+	background-color: $footerbg;
+	padding: 1.9rem 0;
+	
+	.container
+		display flex 
+		@media screen and (max-width: $iphone6)
+			flex-flow: row wrap;	
+		.footer-title
+			min-width: 7rem
+			max-width: 50%;
+			width: 100%;
+			flex: 1 0 auto;
+			margin-bottom: 1rem;
+			.footer-slogan
+				color: $specialRed;
+				transition $transition
+				font-size: 60%;
+				font-weight 300
+		.footer-menu
+			display flex
+			flex: 1 0 auto;
+			ul
+				flex: 1 0 auto;
+				padding 0
+				a
+					line-height: 0.79rem;
+					color: $white;
+					transition $transition
+					font-size: 40%;
+					min-width: 3rem;
+					display: inline-block;
+					&:hover
+						color $specialRed
+						cursor pointer
+		.footer-copy
+			display flex
+			width: 100%;
+			align-items: center;
+			margin 1.2rem 0 0 0
+			flex-flow row wrap
+			.copy
+				color $darkgrey3
+				font-size 25%
+				flex: 1 1 50%;
+			.footer-column
+				margin 0 auto 0 0 
+				flex: 1 0 50%;	
+				&.footer-button
+					margin: 0.8rem auto;
+					flex: 1 1 50%;
+					display: flex;	
+
+
+		

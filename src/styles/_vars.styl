@@ -1,0 +1,118 @@
+$min-font = 22px
+$max-font = 65px
+$min-width = 320px
+$max-width = 1200px
+$contentThin = 940px
+
+$mainfont = 'Work Sans', 'sans-serif'
+$line-height-ratio = $golden
+$heading-ratio = $golden
+$body-font = $mainfont
+$body-font-weight = 300
+$body-color = #1d1e1e
+$heading-font = $mainfont
+$vertical-rhythm = true
+$specialRed = #ff002e
+$headerBg = #1b1b1b
+$white = #FFF
+$darkgrey = #242424
+$darkgrey2 = #545454
+$darkgrey3 = #757575
+$darkhover = #2d2d2d
+$overpadding = 15px
+$specialGrey = #adafaf
+$lightgrey = #d3d3d3
+$lightgrey2 = #e5e5e5
+$darkbg = #121212
+$footerbg = $darkbg
+$transition = .4s ease
+$slide_up_text = .4s cubic-bezier(0, 0.98, 0.94, 1)
+$iphone = 320px
+$iphoneH = $iphone * 1.5
+$iphone5 = 568px
+$iphone6 = 667px
+$iphone6H = 375px
+$ipad = 768px
+$ipadPro = 1024px
+$desktop = $max-width
+$goal01 = '../images/index_hat.png'
+$goal03 = '../images/index_back.png'
+
+
+text_underscore(border, color)
+	display: inline-block;
+	transition $transition
+	color color
+	font-size: 70%;
+	&:after
+		content: "";
+		display: block; 
+		width: 100%
+		max-width: calc('100% - 0.01rem');
+		margin:.2rem auto
+		height: 1px;
+		background-color: $specialRed
+		transition .8s ease
+	&:hover
+		cursor pointer
+		color $specialRed
+		&:after
+			width 0%
+			background-color: border
+
+
+accordion_items()
+	padding 0
+	display: flex;
+	flex-flow: column nowrap;
+	margin: auto;
+	max-width: $contentThin;
+	width: 100%;
+	li
+		span 
+			header
+				text_underscore($specialGrey, #232323)
+				margin: 0.3rem 0;
+				&.active
+					color: $specialGrey
+					&:hover
+						color $specialRed
+					& ~ main
+						display block
+						margin: 0;
+						margin: .5rem 0
+						max-height 100%
+						@media screen and (max-width: $iphoneH)
+							max-height: initial;
+						opacity 1
+						overflow visible
+			.add
+				display inline
+				color $specialRed
+				font-size: 70%;
+				margin: 0 0.8rem;
+				&.null
+					color $specialGrey
+			main
+				text-align left
+				font-size: 30%;
+				margin 0
+				line-height: 200%;
+				max-height 0
+				opacity 0
+				transition $transition
+				overflow hidden
+
+steps_buttons()
+	display flex
+	width 100%
+	margin: 1rem 0;
+	button:first-child
+		margin 0 auto 0 0
+		
+title_light()
+	margin: 0 0 1.3rem;
+	font-weight: 300;
+	line-height: 115%;
+	transition $transition
+	font-size: 140%;
